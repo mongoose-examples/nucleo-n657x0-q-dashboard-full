@@ -1,0 +1,32 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Configure STM32 Debug",
+            "type": "process",
+            "command": "cmake",
+            "args": ["--preset", "Debug"],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Build STM32 Debug",
+            "type": "process",
+            "command": "cmake",
+            "args": ["--build", "--preset", "Debug"],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "dependsOn": "Configure STM32 Debug",
+            "dependsOrder": "sequence",
+            "problemMatcher": ["$gcc"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
+

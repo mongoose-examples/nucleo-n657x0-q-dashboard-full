@@ -1,0 +1,33 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "NUCLEO-N657X0-Q: ST-Link (RAM)",
+            "type": "cortex-debug",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/FSBL/build/nucleo-n657x0-q_FSBL.elf",
+            "preLaunchTask": "Build STM32 Debug",
+            "servertype": "stlink",
+            "runToEntryPoint": "main",
+            "serverArgs": ["-m", "1", "--frequency", "4000"],
+            "overrideLaunchCommands": [
+                "monitor halt",
+                "-target-download",
+                "monitor halt",
+                "set $sp = *(unsigned int *)&g_pfnVectors",
+                "set $pc = Reset_Handler",
+                "set {unsigned int}0xE000ED08 = (unsigned int)&g_pfnVectors"
+            ],
+            "overrideRestartCommands": [
+                "monitor halt",
+                "-target-download",
+                "monitor halt",
+                "set $sp = *(unsigned int *)&g_pfnVectors",
+                "set $pc = Reset_Handler",
+                "set {unsigned int}0xE000ED08 = (unsigned int)&g_pfnVectors"
+            ]
+        }
+    ]
+}
+

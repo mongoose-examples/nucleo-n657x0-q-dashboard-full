@@ -37,3 +37,15 @@ using the following steps:
   - Peripherals (RISUP), enable "Privilege" on ETH1
   - Domains (RIMU): for ETH1, enable SECURE and PRIVILEGE
 - Clock configuration: resolve clocks if required. Find "To ETH1" and make sure it has 100 MHz
+
+## Linker script note
+In case you regenerate the source code from CubeMX, the linker script addresses for Flash and RAM
+will be changed to their default values, which will result in a build error. In this case, always
+make sure linker script contains the following declaration:
+```
+MEMORY
+{
+  ROM    (xrw)    : ORIGIN = 0x34180400,   LENGTH = 300K
+  RAM    (xrw)    : ORIGIN = 0x34140000,   LENGTH = 256K
+}
+```
